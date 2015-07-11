@@ -22,7 +22,7 @@ func TestCache(t *testing.T) {
 func TestCacheDarwin(t *testing.T) {
 	cache := cacheFor(appName, "darwin")
 	assert.NotEmpty(t, cache)
-	assert.True(t, strings.HasSuffix(cache, "Library/Caches/"+appName))
+	assert.Equal(t, home()+"/Library/Caches/"+appName, cache)
 }
 
 func TestCacheWindows(t *testing.T) {
@@ -36,7 +36,7 @@ func TestCacheWindows(t *testing.T) {
 func TestCacheXdgUnset(t *testing.T) {
 	cache := cacheFor(appName, "linux")
 	assert.NotEmpty(t, cache)
-	assert.True(t, strings.HasSuffix(cache, "/.cache/"+appName))
+	assert.Equal(t, home()+"/.cache/"+appName, cache)
 }
 
 func TestCacheXdgSet(t *testing.T) {
@@ -49,32 +49,32 @@ func TestCacheXdgSet(t *testing.T) {
 }
 
 func TestConfigDarwin(t *testing.T) {
-	cache := configFor(appName, "darwin")
-	assert.NotEmpty(t, cache)
-	assert.True(t, strings.HasSuffix(cache, "Library/Application Support/"+appName))
+	config := configFor(appName, "darwin")
+	assert.NotEmpty(t, config)
+	assert.Equal(t, home()+"/Library/Application Support/"+appName, config)
 }
 
 func TestConfigWindows(t *testing.T) {
 	os.Setenv("APPDATA", appdata)
 	defer os.Unsetenv("APPDATA")
-	cache := configFor(appName, "windows")
-	assert.NotEmpty(t, cache)
-	assert.Equal(t, appdata+appName, cache)
+	config := configFor(appName, "windows")
+	assert.NotEmpty(t, config)
+	assert.Equal(t, appdata+appName, config)
 }
 
 func TestConfigXdgUnset(t *testing.T) {
-	cache := configFor(appName, "linux")
-	assert.NotEmpty(t, cache)
-	assert.True(t, strings.HasSuffix(cache, "/.config/"+appName))
+	config := configFor(appName, "linux")
+	assert.NotEmpty(t, config)
+	assert.Equal(t, home()+"/.config/"+appName, config)
 }
 
 func TestConfigXdgSet(t *testing.T) {
 	xdgConfig := os.Getenv("HOME") + "/.xdgconfig/"
 	os.Setenv("XDG_CONFIG_HOME", xdgConfig)
 	defer os.Unsetenv("XDG_CONFIG_HOME")
-	cache := configFor(appName, "linux")
-	assert.NotEmpty(t, cache)
-	assert.Equal(t, xdgConfig+appName, cache)
+	config := configFor(appName, "linux")
+	assert.NotEmpty(t, config)
+	assert.Equal(t, xdgConfig+appName, config)
 }
 
 func TestConfig(t *testing.T) {
