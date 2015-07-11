@@ -9,7 +9,11 @@ import (
 // Cache returns the correct folder to store your apps cache, according to the
 // spec of each operating system.
 func Cache(appName string) string {
-	switch runtime.GOOS {
+	return cacheFor(appName, runtime.GOOS)
+}
+
+func cacheFor(appName, os string) string {
+	switch os {
 	case "darwin":
 		return filepath.Join(home(), "Library", "Caches", appName)
 	case "windows":
@@ -22,7 +26,11 @@ func Cache(appName string) string {
 // Config returns the correct folder to store your apps configuration,
 // according to the spec of each operating system.
 func Config(appName string) string {
-	switch runtime.GOOS {
+	return configFor(appName, runtime.GOOS)
+}
+
+func configFor(appName, os string) string {
+	switch os {
 	case "darwin":
 		return filepath.Join(home(), "Library", "Application Support", appName)
 	case "windows":
