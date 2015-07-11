@@ -12,6 +12,12 @@ func Cache(appName string) string {
 	return cacheFor(appName, runtime.GOOS)
 }
 
+// Config returns the correct folder to store your apps configuration,
+// according to the spec of each operating system.
+func Config(appName string) string {
+	return configFor(appName, runtime.GOOS)
+}
+
 func cacheFor(appName, os string) string {
 	switch os {
 	case "darwin":
@@ -21,12 +27,6 @@ func cacheFor(appName, os string) string {
 	default:
 		return filepath.Join(xdgCache(), appName)
 	}
-}
-
-// Config returns the correct folder to store your apps configuration,
-// according to the spec of each operating system.
-func Config(appName string) string {
-	return configFor(appName, runtime.GOOS)
 }
 
 func configFor(appName, os string) string {
