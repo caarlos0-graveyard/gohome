@@ -2,6 +2,7 @@ package gohome
 
 import (
 	"os"
+	"os/user"
 	"path/filepath"
 	"runtime"
 )
@@ -61,5 +62,9 @@ func appData(appName string) string {
 }
 
 func home() string {
-	return os.Getenv("HOME")
+	u, err := user.Current()
+	if err != nil {
+		panic(err.Error())
+	}
+	return u.HomeDir
 }
