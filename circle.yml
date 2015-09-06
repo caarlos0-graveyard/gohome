@@ -5,5 +5,7 @@ test:
     - go get golang.org/x/tools/cmd/cover
   override:
     - go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out
+    - cat /home/ubuntu/coverage.out
   post:
+    - cat /home/ubuntu/coverage.out
     - /home/ubuntu/bin/goveralls -coverprofile=/home/ubuntu/coverage.out -service=circle-ci -repotoken=$COVERALLS_TOKEN
