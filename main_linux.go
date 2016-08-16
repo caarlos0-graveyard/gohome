@@ -16,7 +16,7 @@ func config(appName string) string {
 func xdgConfig() string {
 	xdg := os.Getenv("XDG_CONFIG_HOME")
 	if xdg == "" {
-		return filepath.Join(home(), ".config")
+		return filepath.Join(os.Getenv("HOME"), ".config")
 	}
 	return xdg
 }
@@ -24,7 +24,7 @@ func xdgConfig() string {
 func xdgCache() string {
 	xdg := os.Getenv("XDG_CACHE_HOME")
 	if xdg == "" {
-		return filepath.Join(home(), ".cache")
+		return filepath.Join(os.Getenv("HOME"), ".cache")
 	}
 	return xdg
 }

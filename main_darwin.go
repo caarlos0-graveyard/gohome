@@ -1,11 +1,14 @@
 package gohome
 
-import "path/filepath"
+import (
+	"os"
+	"path/filepath"
+)
 
 func cache(appName string) string {
-	return filepath.Join(home(), "Library", "Caches", appName)
+	return filepath.Join(os.Getenv("HOME"), "Library", "Caches", appName)
 }
 
 func config(appName string) string {
-	return filepath.Join(home(), "Library", "Application Support", appName)
+	return filepath.Join(os.Getenv("HOME"), "Library", "Application Support", appName)
 }
