@@ -5,7 +5,7 @@ Easily get cache and config folders for your app according to each OS spec
 ## Usage
 
 ```go
-import "http://gopkg.in/caarlos0/gohome.v1"
+import "http://gopkg.in/caarlos0/gohome.v2"
 
 const appName = "my-app"
 
