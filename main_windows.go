@@ -5,11 +5,15 @@ import (
 	"path/filepath"
 )
 
-func cache(appName string) string {
+// Cache returns the correct folder to store your apps cache, according to the
+// spec of each operating system.
+func Cache(appName string) string {
 	return appData(appName)
 }
 
-func config(appName string) string {
+// Config returns the correct folder to store your apps configuration,
+// according to the spec of each operating system.
+func Config(appName string) string {
 	return appData(appName)
 }
 
