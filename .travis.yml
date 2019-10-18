@@ -1,9 +1,5 @@
 language: go
-go: '1.11.x'
-before_install:
-  - go get github.com/axw/gocov/gocov
-  - go get github.com/mattn/goveralls
-  - go get golang.org/x/tools/cmd/cover
+go: '1.13.x'
 script:
   - go test -v -cover -race -coverprofile=coverage.out
 after_script:
