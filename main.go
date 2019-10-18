@@ -1,5 +1,3 @@
-// +build dragonfly freebsd linux netbsd openbsd solaris
-
 package gohome
 
 import (
@@ -9,28 +7,18 @@ import (
 
 // Cache returns the correct folder to store your apps cache, according to the
 // spec of each operating system.
+//
+// Deprecated: use os.UserCacheDir()
 func Cache(appName string) string {
-	return filepath.Join(xdgCache(), appName)
+	s, _ := os.UserCacheDir()
+	return filepath.Join(s, appName)
 }
 
 // Config returns the correct folder to store your apps configuration,
 // according to the spec of each operating system.
+//
+// Deprecated: use os.UserConfigDir()
 func Config(appName string) string {
-	return filepath.Join(xdgConfig(), appName)
-}
-
-func xdgConfig() string {
-	xdg := os.Getenv("XDG_CONFIG_HOME")
-	if xdg == "" {
-		return filepath.Join(os.Getenv("HOME"), ".config")
-	}
-	return xdg
-}
-
-func xdgCache() string {
-	xdg := os.Getenv("XDG_CACHE_HOME")
-	if xdg == "" {
-		return filepath.Join(os.Getenv("HOME"), ".cache")
-	}
-	return xdg
+	s, _ := os.UserConfigDir()
+	return filepath.Join(s, appName)
 }
