@@ -5,3 +5,5 @@ script:
 after_script:
   - go get github.com/mattn/goveralls
   - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken='VxuejQPHXmVEdp3teKkNV8SE6Px8RUrKg'
+notifications:
+  email: false
